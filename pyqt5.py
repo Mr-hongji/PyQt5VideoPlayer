@@ -209,8 +209,8 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
     def playerStatusChanged(self, status):
         self.player_status = status
         if status == 7:
-            this.play_btn.show()
-            this.pause_btn.hide()
+            self.play_btn.show()
+            self.pause_btn.hide()
             
         #print('playerStatusChanged =' + str(status) + '...............')
 
