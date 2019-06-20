@@ -17,7 +17,11 @@ https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
 安装 LAVFilters-0.74.1-Installer.exe程序做解码器，即可支持avi、MP4、flv、rmvb等视频格式
 
 运行：
-  Python pyqt5.py ‘视频路径’
+  Python pyqt5.py ‘视频路径’    
+  
+  例：
+    python pyqt5.py d:/123.avi
+    python pyqt5.py http://127.0.0.1/12345.mp4   （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知）
 
 如图：
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/videoplayer.jpg)
