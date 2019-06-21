@@ -1,11 +1,12 @@
-from PyQt5.Qt import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtMultimedia import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QSlider, QMessageBox, QApplication
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from PyQt5.QtCore import QRect, QUrl, Qt, QSize
+from PyQt5.QtGui import QPalette, QIcon, QCursor, QPixmap
+from PyQt5.QtMultimediaWidgets import QVideoWidget
 import sys
 import random
 from urllib import parse
+
 
 
 class videoPlayer(QWidget):  # 视频播放类
@@ -185,20 +186,24 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
 
     def player_error(self, errorCode):
         print('error = ' + str(errorCode))
-        if errorCode == 0:
-            pass
-        elif errorCode == 1:
-            showAlertWindow('errorCode：1 \n\n无效视频源。')
-        elif errorCode == 2:
-            showAlertWindow('errorCode：2 \n\n不支持的媒体格式')
-        elif errorCode == 3:
-            showAlertWindow('errorCode：3 \n\n网络错误')
-        elif errorCode == 4:
-            showAlertWindow('errorCode：4 \n\n没有权限播放该视频')
-        elif errorCode == 5:
-            showAlertWindow('errorCode：5 \n\n视频服务不存在，无法继续播放。')
-        else:
-            showAlertWindow('未知错误')
+        try:
+            if errorCode == 0:
+                pass
+            elif errorCode == 1:
+                self.showAlertWindow('errorCode：1 \n\n无效视频源。')
+            elif errorCode == 2:
+                self.showAlertWindow('errorCode：2 \n\n不支持的媒体格式')
+            elif errorCode == 3:
+                self.showAlertWindow('errorCode：3 \n\n网络错误')
+            elif errorCode == 4:
+                self.showAlertWindow('errorCode：4 \n\n没有权限播放该视频')
+            elif errorCode == 5:
+                self.showAlertWindow('errorCode：5 \n\n视频服务不存在，无法继续播放。')
+            else:
+                self.showAlertWindow('未知错误')
+        except:
+            self.showAlertWindow('视频加载异常')
+        
         
     def video_silder_pressed(self):
         if self.player.state != 0:
@@ -315,10 +320,15 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
         try:
             
             #print(str(filepath))
-            self.player.setMedia(QMediaContent(QUrl.fromLocalFile(filepath)))  # 返回该文件地址,并把地址放入播放内容中
-            self.player.setVolume(50)  # 设置默认打开音量即为音量条大小
-            self.volume_value.setText(str(50))
-            self.volume_slider.setValue(50)
+            url = QUrl.fromLocalFile(filepath)
+            if url.isValid():
+                self.player.setMedia(QMediaContent(url))  # 返回该文件地址,并把地址放入播放内容中
+                self.player.setVolume(50)  # 设置默认打开音量即为音量条大小
+                self.volume_value.setText(str(50))
+                self.volume_slider.setValue(50)
+            else:
+                self.showAlertWindow('视频地址无效')
+                
         except Exception as e:
             self.showAlertWindow()
         
@@ -461,14 +471,24 @@ if __name__ == "__main__":  # 主函数
     app = QApplication(sys.argv)
     vp = videoPlayer()
     vp.show()
+
+    vp.showAlertWindow(' ::::::::::  '.join(sys.argv))
     
     try:
         if len(sys.argv) > 1:
             #接收传入的参数（视频路径地址）
             filepath = sys.argv[1]
             
+            #使用Protocol Url方式从HTML页面调用程序，参数的分割字符串
+            separator_text = 'videoPlayer://'
+            if filepath.find(separator_text) == 0:
+                filepath = filepath[len(separator_text):]
+
+            vp.showAlertWindow(filepath)
+            
             filepath = parse.unquote(str(filepath),encoding='utf-8')
             #print(filepath)
+            vp.showAlertWindow(filepath)
             vp.getfile(filepath)
         else:
             vp.showAlertWindow('缺少参数！')
