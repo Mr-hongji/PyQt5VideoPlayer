@@ -22,18 +22,16 @@
       会在目录下生成__pycache__、build、dist三个目录，目录结构如图：
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok.png)
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok_1.png)
+
         ➣  把所用到的图片文件images目录复制到dist目录下
         ➣  运行 dist下的 exe文件，ok。
-      
-      
-
-
 
      
 *** Protocol Url使用：**
 
      ➣  打开目录下的 videoPlayer.reg 文件， 修改EXE的放置路径：
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/registerFile.png)
+
      ➣  双击运行.reg文件， 弹出是否继续提示框，选择 “是”，后提示注册完成。
      ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4">videoPlayer 测试</a>`
 
