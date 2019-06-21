@@ -10,10 +10,10 @@
 
 * **Run .py File：**
 
-        ➣  Python pyqt5.py ‘视频路径’    
+        ➣  Python videoPlayer.py ‘视频路径’ 视频名称   ()
       例：
-            python pyqt5.py d:/123.avi
-            python pyqt5.py http://127.0.0.1/12345.mp4   （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知）
+            python videoPlayer.py d:/123.avi  123.avi
+            python videoPlayer.py http://127.0.0.1/12345.mp4 12345.mp4  （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知,所以添加了真实的视频名称用于显示）
 * **MakeExeFileRequird:**
 
         ➣  pip install pywin32
@@ -33,7 +33,7 @@
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/registerFile.png)
 
      ➣  双击运行.reg文件， 弹出是否继续提示框，选择 “是”，后提示注册完成。
-     ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4">videoPlayer 测试</a>`
+     ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4 3.MP4">videoPlayer 测试</a>`
 
 * **说明:**
 
