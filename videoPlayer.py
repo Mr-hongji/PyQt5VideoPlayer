@@ -10,7 +10,7 @@ from urllib import parse
 
 
 class videoPlayer(QWidget):  # 视频播放类
-    def __init__(self):  # 构造函数
+    def __init__(self, fname):  # 构造函数
         super(videoPlayer, self).__init__()  # 类的继承
 
         self.length = 0  # 视频总时长
@@ -21,7 +21,7 @@ class videoPlayer(QWidget):  # 视频播放类
         # 设置窗口
         self.setGeometry(300, 50, 1200, 800) #大小,与桌面放置位置
         self.setWindowIcon(QIcon('images/video_player_icon.png'))  # 程序图标
-        self.setWindowTitle('Video Player')  # 窗口名称
+        self.setWindowTitle(fname)  # 窗口名称
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
      
 
@@ -469,12 +469,22 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
 if __name__ == "__main__":  # 主函数
     
     app = QApplication(sys.argv)
-    vp = videoPlayer()
-    vp.show()
-
-    vp.showAlertWindow(' ::::::::::  '.join(sys.argv))
-    
+   
     try:
+
+        # 视频名称
+        fname = 'videoPlayer'
+        
+        if len(sys.argv) > 2:
+            fname = sys.argv[2]
+
+
+        vp = videoPlayer(fname)
+        vp.show()
+
+        #vp.showAlertWindow(' ::::::::::  '.join(sys.argv))
+        
+
         if len(sys.argv) > 1:
             #接收传入的参数（视频路径地址）
             filepath = sys.argv[1]
@@ -484,12 +494,13 @@ if __name__ == "__main__":  # 主函数
             if filepath.find(separator_text) == 0:
                 filepath = filepath[len(separator_text):]
 
-            vp.showAlertWindow(filepath)
+            #vp.showAlertWindow(filepath)
             
             filepath = parse.unquote(str(filepath),encoding='utf-8')
             #print(filepath)
-            vp.showAlertWindow(filepath)
+            #vp.showAlertWindow(filepath)
             vp.getfile(filepath)
+            
         else:
             vp.showAlertWindow('缺少参数！')
         
