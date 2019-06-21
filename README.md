@@ -27,15 +27,15 @@
         ➣  运行 dist下的 exe文件，ok。
 
      
-* ** Protocol Url使用：**
+* **Protocol Url使用:**
 
      ➣  打开目录下的 videoPlayer.reg 文件， 修改EXE的放置路径：
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/registerFile.png)
 
      ➣  双击运行.reg文件， 弹出是否继续提示框，选择 “是”，后提示注册完成。
      ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4">videoPlayer 测试</a>`
-     
-* ** 说明：**
+
+* **说明:**
 
         ➣ 本地视频文件名中包含中文或空格时，需要把文件名 encode() 一下
         ➣ 在线的视频文件名目前只支持数字，比如：123.mp4
