@@ -477,7 +477,7 @@ if __name__ == "__main__":  # 主函数
         
         if len(sys.argv) > 2:
             fname = sys.argv[2]
-
+            fname = parse.unquote(str(fname),encoding='utf-8')
 
         vp = videoPlayer(fname)
         vp.show()
