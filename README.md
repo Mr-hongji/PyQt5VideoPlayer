@@ -6,14 +6,16 @@
 * **DevRequird:**
 
         ➣  Python 3.x
-        ➣   pip install pyqt5
+        ➣  pip install pyqt5
 
 * **Run .py File：**
+
         ➣  Python pyqt5.py ‘视频路径’    
       例：
             python pyqt5.py d:/123.avi
             python pyqt5.py http://127.0.0.1/12345.mp4   （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知）
 * **MakEexeFileRequird:**
+
         ➣   pip install pywin32
         ➣  pip install pyinstaller
         ➣  打开 cmd, 切换到该项目的根目录下运行： pyinstaller -F -w -i images/favicon.ico pyqt5.py
@@ -29,7 +31,8 @@
 
      
 *** Protocol Url使用：**
-      ➣  打开目录下的 videoPlayer.reg 文件， 修改EXE的放置路径：
+
+     ➣  打开目录下的 videoPlayer.reg 文件， 修改EXE的放置路径：
       ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/registerFile.png)
      ➣  双击运行.reg文件， 弹出是否继续提示框，选择 “是”，后提示注册完成。
      ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4">videoPlayer 测试</a>`
