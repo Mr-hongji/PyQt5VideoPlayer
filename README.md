@@ -4,6 +4,7 @@
 * 安装 LAVFilters-0.74.1-Installer.exe程序做解码器，即可支持avi、MP4、flv、rmvb等视频格式（必须）
 * [**pyqt5官方文档**](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html)
 * **DevRequird:**
+
         ➣  Python 3.x
         ➣   pip install pyqt5
 
