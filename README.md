@@ -14,9 +14,9 @@
       例：
             python pyqt5.py d:/123.avi
             python pyqt5.py http://127.0.0.1/12345.mp4   （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知）
-* **MakEexeFileRequird:**
+* **MakeExeFileRequird:**
 
-        ➣   pip install pywin32
+        ➣  pip install pywin32
         ➣  pip install pyinstaller
         ➣  打开 cmd, 切换到该项目的根目录下运行： pyinstaller -F -w -i images/favicon.ico pyqt5.py
       会在目录下生成__pycache__、build、dist三个目录，目录结构如图：
