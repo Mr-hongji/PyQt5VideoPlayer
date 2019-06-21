@@ -40,14 +40,15 @@ https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
      3、打开 cmd, 切换到该项目的根目录下运行： pyinstaller -F -w -i images/favicon.ico pyqt5.py
       会在目录下生成__pycache__、build、dist三个目录，目录结构如图：
       
-      ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok.png)
       
-      ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok_1.png)
       
      4、把所用到的图片文件images目录复制到dist目录下
       
      5、运行 dist下的 exe文件，ok。
      
+     ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok.png)
+      
+     ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok_1.png)
  
  ### Protocol Url使用：
       
