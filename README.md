@@ -10,20 +10,19 @@
 
 * **Run .py File：**
 
-        ➣  Python videoPlayer.py ‘视频路径’ 视频名称   ()
+        ➣  Python videoPlayer.py ‘视频路径’?vName=视频名称
       例：
-            python videoPlayer.py d:/123.avi  123.avi
-            python videoPlayer.py http://127.0.0.1/12345.mp4 12345.mp4  （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知,所以添加了真实的视频名称用于显示）
+            python videoPlayer.py d:/123.avi?vName=123.avi
+            python videoPlayer.py http://127.0.0.1/12345.mp4?vName=12345.mp4  （视频地址是 HTTP 的时候，视频名称最好设置为数字，其他字符会导致视频无法播放，原因暂时未知,所以添加了真实的视频名称用于显示）
 * **MakeExeFileRequird:**
 
         ➣  pip install pywin32
         ➣  pip install pyinstaller
-        ➣  打开 cmd, 切换到该项目的根目录下运行： pyinstaller -F -w -i images/favicon.ico pyqt5.py
+        ➣  打开 cmd, 切换到该项目的根目录下运行： pyinstaller -F -w -i images/favicon.ico videoPlayer.py
       会在目录下生成__pycache__、build、dist三个目录，目录结构如图：
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok.png)
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/pyinstaller_ok_1.png)
 
-        ➣  把所用到的图片文件images目录复制到dist目录下
         ➣  运行 dist下的 exe文件，ok。
 
      
@@ -33,7 +32,18 @@
 ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/registerFile.png)
 
      ➣  双击运行.reg文件， 弹出是否继续提示框，选择 “是”，后提示注册完成。
-     ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4 3.MP4">videoPlayer 测试</a>`
+     ➣  HTML页面中的使用：`<a href="videoPlayer://http://127.0.0.1/3.mp4?vName=3.MP4">videoPlayer 测试</a>`
+
+
+* **打包关联图标到exe中**
+       ➣  在目录先新建 images.qrc 文件，如图：
+       
+ ![image](https://github.com/Mr-hongji/PyQt5VideoPlayer/blob/master/images/qrc.png)
+ 
+        ➣  打开 cmd， 运行命令：pyrcc5 -o images.py images.qrc,  把.qrc文件转换成.py文件
+        ➣  在 videoPlayer.py 文件中导入 images.py (import images)
+        ➣  在 videoPlayer.py 文件中引用图片资源文件（:/images/play_btn_icon.png）
+        ➣  最后执行 pyinstaler -F -w -i favicon videoPlayer.py  命令生成exe, 图标资源文件就一起被打包到exe里了。
 
 * **说明:**
 
