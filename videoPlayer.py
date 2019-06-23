@@ -6,11 +6,12 @@ from PyQt5.QtMultimediaWidgets import QVideoWidget
 import sys
 import random
 from urllib import parse
+import images
 
 
 
 class videoPlayer(QWidget):  # 视频播放类
-    def __init__(self, fname):  # 构造函数
+    def __init__(self, titleName):  # 构造函数
         super(videoPlayer, self).__init__()  # 类的继承
 
         self.length = 0  # 视频总时长
@@ -20,8 +21,8 @@ class videoPlayer(QWidget):  # 视频播放类
 
         # 设置窗口
         self.setGeometry(300, 50, 1200, 800) #大小,与桌面放置位置
-        self.setWindowIcon(QIcon('images/video_player_icon.png'))  # 程序图标
-        self.setWindowTitle(fname)  # 窗口名称
+        self.setWindowIcon(QIcon(':/images/video_player_icon.png'))  # 程序图标
+        self.setWindowTitle(titleName)  # 窗口名称
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
      
 
@@ -68,7 +69,7 @@ class videoPlayer(QWidget):  # 视频播放类
 
         # 播放按钮
         self.play_btn = QPushButton(self)
-        self.play_btn.setIcon(QIcon('images/play_btn_icon.png'))  # 设置按钮图标,下同
+        self.play_btn.setIcon(QIcon(':/images/play_btn_icon.png'))  # 设置按钮图标,下同
         self.play_btn.setIconSize(QSize(35,35))
         self.play_btn.setStyleSheet('''QPushButton{border:none;}QPushButton:hover{border:none;border-radius:35px;}''')
         self.play_btn.setCursor(QCursor(Qt.PointingHandCursor))
@@ -125,12 +126,12 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
         self.mute_button.setCursor(QCursor(Qt.PointingHandCursor))
         self.mute_button.setToolTip("播放")
         self.mute_button.setFlat(True)
-        self.mute_button.setIcon(QIcon('images/sound_btn_icon.png'))
+        self.mute_button.setIcon(QIcon(':/images/sound_btn_icon.png'))
                             
         
         #暂停按钮
         self.pause_btn = QPushButton('')   
-        self.pause_btn.setIcon(QIcon('images/stop_btn_icon.png'))
+        self.pause_btn.setIcon(QIcon(':/images/stop_btn_icon.png'))
         self.pause_btn.clicked.connect(self.stop_button)
         self.pause_btn.setIconSize(QSize(35,35))
         self.pause_btn.setStyleSheet('''QPushButton{border:none;}QPushButton:hover{border:none;}''')
@@ -155,7 +156,7 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
 
         #全屏按钮
         self.screen_btn = QPushButton('')
-        self.screen_btn.setIcon(QIcon(QPixmap('images/fullsrceen_btn_icon.png')))
+        self.screen_btn.setIcon(QIcon(QPixmap(':/images/fullsrceen_btn_icon.png')))
         self.screen_btn.setIconSize(QSize(38,38))
         self.screen_btn.setStyleSheet('''QPushButton{border:none;}QPushButton:hover{border:1px solid #F3F3F5;border-radius:35px;}''')
         self.screen_btn.setCursor(QCursor(Qt.PointingHandCursor))
@@ -348,10 +349,10 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
                 volume_value = str(size) + ' ' * 4
                 self.volume_value.setText(volume_value)
                 #print(size)
-                self.mute_button.setIcon(QIcon('images/sound_btn_icon.png'))
+                self.mute_button.setIcon(QIcon(':/images/sound_btn_icon.png'))
             else:
                 self.player.setMuted(True)
-                self.mute_button.setIcon(QIcon('images/mute_btn_icon.png'))
+                self.mute_button.setIcon(QIcon(':/images/mute_btn_icon.png'))
                 self.player.setVolume(0)
                 volume_value = '0' + ' ' * 4
                 self.volume_value.setText(volume_value)
@@ -371,13 +372,13 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
     def mute(self):
         try:
             if self.player.isMuted():
-                self.mute_button.setIcon(QIcon('images/sound_btn_icon.png'))
+                self.mute_button.setIcon(QIcon(':/images/sound_btn_icon.png'))
                 self.player.setMuted(False)
                 self.volume_slider.setValue(50)
                 volume_value = '50' + ' ' * 4
                 self.volume_value.setText(volume_value)
             else:
-                self.mute_button.setIcon(QIcon('images/mute_btn_icon.png'))
+                self.mute_button.setIcon(QIcon(':/images/mute_btn_icon.png'))
                 self.player.setMuted(True)  # 若不为静音，则设置为静音，音量置为0
                 self.volume_slider.setValue(0)
                 volume_value = '0' + ' ' * 4
@@ -463,6 +464,9 @@ QSlider::handle:horizontal{background: qradialgradient(spread:pad, cx:0.5, cy:0.
                                     "消息框标题",  
                                     msg,  
                                     QMessageBox.Yes)
+
+    def setWindowTitleName(self, titleName):
+        self.setWindowTitle(titleName)  # 窗口名称
                
  
 
@@ -471,38 +475,44 @@ if __name__ == "__main__":  # 主函数
     app = QApplication(sys.argv)
    
     try:
-
+        
         # 视频名称
         fname = 'videoPlayer'
-        
-        if len(sys.argv) > 2:
-            fname = sys.argv[2]
-            fname = parse.unquote(str(fname),encoding='utf-8')
-
+       
         vp = videoPlayer(fname)
         vp.show()
 
         #vp.showAlertWindow(' ::::::::::  '.join(sys.argv))
         
-
         if len(sys.argv) > 1:
+            
             #接收传入的参数（视频路径地址）
             filepath = sys.argv[1]
             
             #使用Protocol Url方式从HTML页面调用程序，参数的分割字符串
-            separator_text = 'videoPlayer://'
-            if filepath.find(separator_text) == 0:
+            separator_text = 'videoplayer://'
+            if filepath.find(separator_text) == 0 or filepath.find(separator_text.lower()) == 0:
                 filepath = filepath[len(separator_text):]
 
             #vp.showAlertWindow(filepath)
             
             filepath = parse.unquote(str(filepath),encoding='utf-8')
             #print(filepath)
-            #vp.showAlertWindow(filepath)
-            vp.getfile(filepath)
+
+            res = parse.urlparse(filepath)
+            param_dict = dict(parse.parse_qsl(res.query))
+            vname = param_dict.get('vName', None)
+            if vname:
+                
+                fname = parse.unquote(str(vname),encoding='utf-8')
+                        
+            #vp.showAlertWindow(filepath.split('?')[0])
+            vp.getfile(filepath.split('?')[0])
             
         else:
             vp.showAlertWindow('缺少参数！')
+
+        vp.setWindowTitleName(fname)
         
     except Exception as e:
         pass

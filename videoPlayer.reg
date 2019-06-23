@@ -2,13 +2,13 @@ Windows Registry Editor Version 5.00
   
 [HKEY_CLASSES_ROOT\videoPlayer]  
   
-"URL Protocol"="E:\\PyQt5VideoPlayer\\dist\\pyqt5.exe"  
+"URL Protocol"="D:\\pycode\\PyQt5VideoPlayer\\dist\\videoPlayer.exe"  
   
 @="videoPlayerProtocol"  
   
 [HKEY_CLASSES_ROOT\videoPlayer\DefaultIcon]  
   
-@="E:\\PyQt5VideoPlayer\\dist\\pyqt5.exe,1"  
+@="D:\\pycode\\PyQt5VideoPlayer\\dist\\videoPlayer.exe,1"  
   
 [HKEY_CLASSES_ROOT\videoPlayer\shell]  
   
@@ -16,5 +16,5 @@ Windows Registry Editor Version 5.00
   
 [HKEY_CLASSES_ROOT\videoPlayer\shell\open\command]  
   
-@="\"E:\\PyQt5VideoPlayer\\dist\\pyqt5.exe\" \"%1\""
+@="\"D:\\pycode\\PyQt5VideoPlayer\\dist\\videoPlayer.exe\" \"%1\""
 
